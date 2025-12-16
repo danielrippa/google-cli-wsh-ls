@@ -6,7 +6,7 @@
   { try-read-textfile-lines } = dependency 'os.filesystem.TextFile'
   { run } = dependency 'os.com.Shell'
   { try-get-clipboard-text, try-set-clipboard-text } = dependency 'os.shell.Clipboard'
-  { get-auth-code-url, get-token-response-for-auth-code } = dependency 'google.auth.OAuth'
+  { get-auth-code-url, get-token-response-for-auth-code } = dependency 'google.OAuth'
   { string-repeat } = dependency 'value.String'
 
   { value-as-string } = dependency 'prelude.reflection.Value'
