@@ -3,7 +3,7 @@
   { stderr-lines } = dependency 'os.shell.IO'
   { get-service-manager } = dependency 'Services'
   { serialize-objects } = dependency 'value.string.AsciiSeparators'
-  { stderr-lines, stdout } = dependency 'os.shell.IO'
+  { stderr-lines, stdout, debug } = dependency 'os.shell.IO'
   { is-empty-array } = dependency 'value.Array'
   { value-or-error } = dependency 'prelude.error.Value'
 
@@ -13,12 +13,14 @@
 
   [ resource, command, ...args ] = argv
 
-  gmail.invoke-resource-command-with-args resource, command, args
+  debug "from gm process: about to invoke resource command"
 
   errorlevel++ ; { error, value: results } = value-or-error -> gmail.invoke-resource-command-with-args resource, command, args
   if error isnt void => stderr-lines [ error.message ] ; exit errorlevel
 
+  debug "from gm process: finished executing resource command, will output the serialized results"
+
   stdout serialize-objects results unless is-empty-array results
 
-
+  debug "from gm process: finished outputting serialized results"
 
